@@ -58,7 +58,7 @@ def business_local_owner_reg_count():
     :rtype: str
     """
 
-    sql_query = """\SELECT COUNT(*) FROM businesses 
+    sql_query = """SELECT COUNT(*) FROM businesses 
     WHERE postal_code == owner_zip AND business_certificate NOT NULL"""
     return sql_query
 
