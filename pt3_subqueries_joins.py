@@ -12,7 +12,21 @@ def top_postcodes_for_chain_stores():
     :rtype: str
     """
 
-    raise NotImplementedError
+    sql_query = """\SELECT postal_code, COUNT(*) AS frequency
+    FROM businesses
+    WHERE owner_name IN (
+    SELECT DISTINCT(owner_name)
+    FROM (SELECT owner_name, COUNT(business_id) AS num_restaurants
+    FROM businesses
+    GROUP BY owner_name
+    ORDER BY num_restaurants DESC) AS restaurant_owners
+    WHERE restaurant_owners.num_restaurants >= 5)
+    GROUP BY postal_code
+    ORDER BY frequency DESC
+    LIMIT 10"""
+
+    return sql_query
+
 
 
 def inspection_scores_in_94103():
@@ -25,7 +39,19 @@ def inspection_scores_in_94103():
     :rtype: str
     """
 
-    raise NotImplementedError
+    sql_query = """\
+    SELECT
+    MIN(ins.Score) as min_score, 
+    ROUND(AVG(ins.Score), 1) as avg_score,
+    MAX(ins.Score) as max_score
+    FROM businesses as res
+    INNER JOIN inspections as ins
+    ON res.business_id == ins.business_id
+    WHERE ins.Score NOT NULL
+    AND res.postal_code == '94103'"""
+    return sql_query
+
+
 
 
 def risk_categories_in_94103():
