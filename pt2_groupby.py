@@ -56,7 +56,12 @@ def avg_score_by_inspection_type():
     :rtype: str
     """
 
-    raise NotImplementedError
+    sql_query = """\SELECT type, ROUND(AVG(Score), 1) as 'average_score' FROM inspections
+        WHERE Score NOT NULL
+        GROUP BY type
+        ORDER BY average_score"""
+    return sql_query
+
 
 
 def owner_per_restaurant_count():
