@@ -56,7 +56,7 @@ def avg_score_by_inspection_type():
     :rtype: str
     """
 
-    sql_query = """\SELECT type, ROUND(AVG(Score), 1) as 'average_score' FROM inspections
+    sql_query = """SELECT type, ROUND(AVG(Score), 1) as 'average_score' FROM inspections
         WHERE Score NOT NULL
         GROUP BY type
         ORDER BY average_score"""
@@ -73,7 +73,7 @@ def owner_per_restaurant_count():
     :rtype: str
     """
 
-    sql_query = """\SELECT owner_name, COUNT(business_id) as num_restaurants FROM businesses
+    sql_query = """SELECT owner_name, COUNT(business_id) as num_restaurants FROM businesses
             GROUP BY owner_name
             ORDER BY num_restaurants DESC
             LIMIT 10"""
