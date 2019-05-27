@@ -8,7 +8,7 @@ def business_ids_count():
     :rtype: str
     """
 
-    raise NotImplementedError
+    return "SELECT COUNT(business_id) FROM businesses"
 
 
 def unique_business_names_count():
@@ -20,7 +20,9 @@ def unique_business_names_count():
     :rtype: str
     """
 
-    raise NotImplementedError
+    sql_query = "SELECT COUNT(DISTINCT(name)) as 'unique restaurant name count' FROM businesses"
+    return sql_query
+
 
 
 def first_and_last_investigation():
@@ -31,7 +33,9 @@ def first_and_last_investigation():
     :rtype: str
     """
 
-    raise NotImplementedError
+    sql_query = "SELECT MIN(date) AS 'earliest date', MAX(date) AS 'latest date' FROM inspections"
+    return sql_query
+
 
 
 def business_local_owner_count():
@@ -42,7 +46,9 @@ def business_local_owner_count():
     :rtype: str
     """
 
-    raise NotImplementedError
+    sql_query = "SELECT COUNT(*) FROM businesses WHERE postal_code == owner_zip"
+    return sql_query
+
 
 
 def business_local_owner_reg_count():
@@ -52,6 +58,7 @@ def business_local_owner_reg_count():
     :rtype: str
     """
 
-    raise NotImplementedError
+    sql_query = """\SELECT COUNT(*) FROM businesses WHERE postal_code == owner_zip AND business_certificate NOT NULL"""
+    return sql_query
 
 
