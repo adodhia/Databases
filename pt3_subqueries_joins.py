@@ -63,6 +63,16 @@ def risk_categories_in_94103():
     :rtype: str
     """
 
-    raise NotImplementedError
+    sql_query = """\
+    SELECT risk_category, COUNT(*) as frequency
+    FROM businesses as res
+    JOIN violations as vio
+    ON res.business_id == vio.business_id
+    where res.postal_code == '94103'
+    GROUP BY risk_category
+    ORDER BY frequency DESC"""
+
+    return sql_query
+
 
 
